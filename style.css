@@ -1,0 +1,393 @@
+/* --- Variables & Colors --- */
+:root {
+    --bg-primary: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --primary-color: #4f46e5;
+    --primary-hover: #4338ca;
+    
+    /* Category Colors */
+    --color-underweight: #0ea5e9;
+    --color-healthy: #10b981;
+    --color-overweight: #f59e0b;
+    --color-obese: #ef4444;
+    
+    --border-color: #e2e8f0;
+    --error-bg: #fef2f2;
+    --error-border: #fca5a5;
+    --error-text: #b91c1c;
+
+    --font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    --shadow-sm: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    --shadow-lg: 0 10px 15px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.08);
+    --border-radius: 16px;
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* --- Base Reset --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: var(--font-family);
+}
+
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+}
+
+/* --- Core Layout & Container --- */
+.calculator-container {
+    width: 100%;
+    max-width: 480px;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.calc-header {
+    text-align: center;
+}
+
+.logo-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    background-color: #e0e7ff;
+    color: var(--primary-color);
+    border-radius: 12px;
+    margin-bottom: 0.75rem;
+}
+
+.calc-header h1 {
+    font-size: 1.75rem;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--text-main);
+    margin-bottom: 0.25rem;
+}
+
+.subtitle {
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.calc-card {
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-color);
+}
+
+/* --- Inputs & Styling --- */
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.input-group label {
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding: 0.85rem 1rem;
+    font-size: 1.05rem;
+    font-weight: 500;
+    border: 1.5px solid var(--border-color);
+    border-radius: 10px;
+    outline: none;
+    background-color: #fff;
+    transition: var(--transition);
+}
+
+.input-wrapper input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+.unit-badge {
+    position: absolute;
+    right: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background-color: #f1f5f9;
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+    pointer-events: none;
+}
+
+.helper-text {
+    font-size: 0.75rem;
+    color: var(--text-muted);
+}
+
+/* --- Error Box --- */
+.error-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    background-color: var(--error-bg);
+    border: 1px solid var(--error-border);
+    color: var(--error-text);
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    transform: translateY(-8px);
+    height: 0;
+    padding: 0;
+    margin: 0;
+    overflow: hidden;
+    transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.error-box.show {
+    opacity: 1;
+    transform: translateY(0);
+    height: auto;
+    padding: 0.85rem 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.error-icon {
+    flex-shrink: 0;
+    margin-top: 1px;
+}
+
+/* --- Buttons --- */
+.button-group {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 0.75rem;
+}
+
+.btn {
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.85rem 1rem;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-primary {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    box-shadow: 0 4px 12px rgba(79, 70, 229, 0.2);
+}
+
+.btn-primary:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background-color: #f1f5f9;
+    color: var(--text-muted);
+}
+
+.btn-secondary:hover {
+    background-color: #e2e8f0;
+    color: var(--text-main);
+}
+
+.btn-secondary:active {
+    transform: scale(0.98);
+}
+
+/* --- Results Section (Smooth Expansion) --- */
+.results-section {
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.results-section.show {
+    opacity: 1;
+    max-height: 500px;
+    margin-top: 1.5rem;
+}
+
+.divider {
+    border: 0;
+    border-top: 1.5px solid var(--border-color);
+    margin-bottom: 1.5rem;
+}
+
+.result-score-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #f8fafc;
+    padding: 1.25rem;
+    border-radius: 12px;
+    margin-bottom: 1.5rem;
+}
+
+.score-display, .category-display {
+    display: flex;
+    flex-direction: column;
+}
+
+.category-display {
+    align-items: flex-end;
+}
+
+.score-label, .category-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+    margin-bottom: 0.25rem;
+}
+
+.score-number {
+    font-size: 2.25rem;
+    font-weight: 800;
+    color: var(--text-main);
+    line-height: 1;
+}
+
+.category-badge {
+    display: inline-block;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #fff;
+    text-align: center;
+}
+
+/* Dynamic State Colors for Category Badges */
+.bg-underweight { background-color: var(--color-underweight); }
+.bg-healthy { background-color: var(--color-healthy); }
+.bg-overweight { background-color: var(--color-overweight); }
+.bg-obese { background-color: var(--color-obese); }
+
+/* --- Visual Gauge --- */
+.gauge-container {
+    position: relative;
+    margin-bottom: 1.5rem;
+    padding: 0 4px;
+}
+
+.gauge-bar {
+    height: 8px;
+    display: flex;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.gauge-segment {
+    height: 100%;
+}
+
+.gauge-segment.underweight { flex-grow: 185; background-color: var(--color-underweight); opacity: 0.85; }
+.gauge-segment.healthy { flex-grow: 64; background-color: var(--color-healthy); opacity: 0.85; }
+.gauge-segment.overweight { flex-grow: 50; background-color: var(--color-overweight); opacity: 0.85; }
+.gauge-segment.obese { flex-grow: 100; background-color: var(--color-obese); opacity: 0.85; }
+
+.gauge-pointer {
+    position: absolute;
+    top: -4px;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: left 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.pointer-arrow {
+    width: 0;
+    height: 0;
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-bottom: 16px solid var(--text-main);
+}
+
+.gauge-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    margin-top: 0.5rem;
+    padding: 0 2px;
+}
+
+/* --- Advice Display --- */
+.advice-card {
+    border-left: 4px solid var(--primary-color);
+    background-color: #f0fdf4;
+    padding: 0.85rem 1rem;
+    border-radius: 0 10px 10px 0;
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: #1e3a1e;
+}
+
+.advice-underweight { border-color: var(--color-underweight); background-color: #f0f9ff; color: #0c4a6e;}
+.advice-healthy { border-color: var(--color-healthy); background-color: #f0fdf4; color: #14532d;}
+.advice-overweight { border-color: var(--color-overweight); background-color: #fffbeb; color: #78350f;}
+.advice-obese { border-color: var(--color-obese); background-color: #fef2f2; color: #7f1d1d;}
+
+/* --- Footer Info --- */
+.calc-footer {
+    text-align: center;
+}
+
+.calc-footer p {
+    font-size: 0.75rem;
+    line-height: 1.4;
+    color: var(--text-muted);
+}
+
+/* --- Responsiveness & Breakpoints --- */
+@media (max-width: 480px) {
+    body {
+        padding: 1rem;
+    }
+    
+    .calc-card {
+        padding: 1.5rem;
+    }
+
+    .button-group {
+        grid-template-columns: 1fr;
+    }
+
+    .btn-secondary {
+        order: 2; /* Move reset under calculated action on narrow devices */
+    }
+}

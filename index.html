@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern BMI Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="calculator-container">
+        <header class="calc-header">
+            <div class="logo-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m19 11-8-8-8 8"/><path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-7"/><path d="M12 18v-6"/></svg>
+            </div>
+            <h1>BMI Calculator</h1>
+            <p class="subtitle">Calculate your Body Mass Index instantly</p>
+        </header>
+
+        <main class="calc-card">
+            <form id="bmiForm" novalidate>
+                <!-- Height Input -->
+                <div class="input-group">
+                    <label for="height">Height</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="number" 
+                            id="height" 
+                            placeholder="e.g. 1.75" 
+                            step="0.01" 
+                            required
+                        >
+                        <span class="unit-badge">meters (m)</span>
+                    </div>
+                    <span class="helper-text">Enter your height in decimal form (e.g. 1.75)</span>
+                </div>
+
+                <!-- Weight Input -->
+                <div class="input-group">
+                    <label for="weight">Weight</label>
+                    <div class="input-wrapper">
+                        <input 
+                            type="number" 
+                            id="weight" 
+                            placeholder="e.g. 70" 
+                            step="0.1" 
+                            required
+                        >
+                        <span class="unit-badge">kg</span>
+                    </div>
+                    <span class="helper-text">Enter your weight in kilograms (e.g. 72.5)</span>
+                </div>
+
+                <!-- Error Box -->
+                <div id="errorBox" class="error-box" aria-hidden="true">
+                    <svg class="error-icon" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+                    <span id="errorMessage"></span>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button type="submit" id="calculateBtn" class="btn btn-primary">
+                        Calculate BMI
+                    </button>
+                    <button type="button" id="resetBtn" class="btn btn-secondary">
+                        Reset
+                    </button>
+                </div>
+            </form>
+
+            <!-- Results Section (Initially Hidden) -->
+            <section id="resultsSection" class="results-section hidden">
+                <hr class="divider">
+                
+                <div class="result-score-container">
+                    <div class="score-display">
+                        <span class="score-label">Your BMI</span>
+                        <span id="bmiValue" class="score-number">22.4</span>
+                    </div>
+                    <div class="category-display">
+                        <span class="category-label">Classification</span>
+                        <span id="bmiCategory" class="category-badge">Healthy Weight</span>
+                    </div>
+                </div>
+
+                <!-- BMI Visual Gauge -->
+                <div class="gauge-container">
+                    <div class="gauge-bar">
+                        <div class="gauge-segment underweight"></div>
+                        <div class="gauge-segment healthy"></div>
+                        <div class="gauge-segment overweight"></div>
+                        <div class="gauge-segment obese"></div>
+                    </div>
+                    <div id="gaugePointer" class="gauge-pointer" style="left: 50%;">
+                        <div class="pointer-arrow"></div>
+                    </div>
+                    <div class="gauge-labels">
+                        <span>18.5</span>
+                        <span>25.0</span>
+                        <span>30.0</span>
+                    </div>
+                </div>
+
+                <div class="advice-card">
+                    <p id="adviceText">You have a healthy weight structure. Maintain your physical activities and balanced nutrition!</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="calc-footer">
+            <p>Body Mass Index (BMI) is a starting point assessment. It is not a direct measure of body fat.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
